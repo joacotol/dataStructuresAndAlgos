@@ -1,0 +1,107 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[] values = new int[100];
+        final String fileName = "src/Ex1_1.txt";
+
+        File file = new File(fileName);
+
+
+        try {
+            Scanner fileInput = new Scanner(file);
+            int counter = 0;
+            while (fileInput.hasNextInt()) {
+                values[counter] = fileInput.nextInt();
+                counter++;
+            }
+        } catch (IOException e) {
+            System.out.println("File not valid.");
+        }
+
+
+        values = Arrays.copyOf(values, 14);
+        System.out.println(Arrays.toString(values));
+
+        System.out.println(count9(values));
+        int[] only9s = filter9(values);
+        int[] index9s = whereAreThe9s(values);
+        System.out.println(Arrays.toString(only9s));
+        System.out.println(Arrays.toString(index9s));
+    }
+
+    public static int count9(int[] data) {
+        int[] newArray = new int[data.length];
+        int counter = 0;
+        for (int value: data) {
+            int fakeValue = value;
+            while (fakeValue >= 9) {
+                //System.out.println(fakeValue % 10);
+                if (fakeValue % 10 == 9) {
+                    newArray[counter] = value;
+
+                    counter++;
+                    break;
+                } else {
+                    fakeValue = fakeValue / 10;
+                }
+            }
+        }
+        newArray = Arrays.copyOf(newArray, counter);
+        //System.out.println(Arrays.toString(newArray));
+
+        return counter;
+    }
+
+    public static int[] filter9(int[] data) {
+        int[] newArray = new int[data.length];
+        int counter = 0;
+        for (int value: data) {
+            int fakeValue = value;
+            while (fakeValue >= 9) {
+                //System.out.println(fakeValue % 10);
+                if (fakeValue % 10 == 9) {
+                    newArray[counter] = value;
+
+                    counter++;
+                    break;
+                } else {
+                    fakeValue = fakeValue / 10;
+                }
+            }
+        }
+        newArray = Arrays.copyOf(newArray, counter);
+        //System.out.println(Arrays.toString(newArray));
+
+        return newArray;
+    }
+
+    public static int[] whereAreThe9s(int[] data) {
+        int[] newArray = new int[data.length];
+        int counter = 0;
+        int index = 0;
+        for (int value: data) {
+            int fakeValue = value;
+            while (fakeValue >= 9) {
+                //System.out.println(fakeValue % 10);
+                if (fakeValue % 10 == 9) {
+                    newArray[counter] = index;
+
+                    counter++;
+                    break;
+                } else {
+                    fakeValue = fakeValue / 10;
+                }
+            }
+            index++;
+        }
+        newArray = Arrays.copyOf(newArray, counter);
+        //System.out.println(Arrays.toString(newArray));
+
+        return newArray;
+    }
+}
